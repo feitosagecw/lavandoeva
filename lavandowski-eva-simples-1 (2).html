@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavandowski + EVA - Fluxo Simplificado</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.3/dist/mermaid.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap');
+        
+        :root {
+            --bg-color: #ffffff;
+            --card-bg: #f8f9fa;
+            --eva-color: #e91e63;
+            --eva-light: #f8bbd0;
+            --lavan-color: #2196f3;
+            --lavan-light: #bbdefb;
+            --text-color: #212121;
+            --accent-color: #5e35b1;
+            --light-gray: #eceff1;
+            --border-radius: 16px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        
+        header {
+            padding: 2rem 0 1rem;
+            text-align: center;
+            background-color: var(--light-gray);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+        }
+        
+        .subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: rgba(33, 33, 33, 0.7);
+            margin: 0.5rem 0;
+        }
+        
+        .system-highlight {
+            display: inline-block;
+            padding: 0 0.5rem;
+            border-radius: 4px;
+            margin: 0 0.25rem;
+        }
+        
+        .eva {
+            background-color: var(--eva-light);
+            color: var(--eva-color);
+        }
+        
+        .lavan {
+            background-color: var(--lavan-light);
+            color: var(--lavan-color);
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 1600px;
+            margin: 1.5rem auto;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: auto;
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 200px);
+        }
+        
+        .mermaid {
+            font-size: 16px;
+            font-family: 'Space Mono', monospace;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0 2rem;
+        }
+        
+        .controls button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .controls button:hover {
+            background: #4527a0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(94, 53, 177, 0.25);
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fluxo de Comunicação <span class="system-highlight eva">EVA</span> + <span class="system-highlight lavan">LAVANDOWSKI</span></h1>
+        <div class="subtitle">Processo automatizado de análise e comunicação</div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #e91e63;"></div>
+                <span>EVA (Atendimento)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #2196f3;"></div>
+                <span>Lavandowski (PLD)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #9c27b0;"></div>
+                <span>Gateway</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #673ab7;"></div>
+                <span>LLMs</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #555555;"></div>
+                <span>Cliente</span>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="mermaid">
+            graph TB
+                %% Estilos dos nós
+                classDef client fill:#555555,stroke:#444444,color:white,stroke-width:1px
+                classDef eva fill:#e91e63,stroke:#c2185b,color:white,stroke-width:0px
+                classDef gateway fill:#9c27b0,stroke:#7b1fa2,color:white,stroke-width:0px
+                classDef lavan fill:#2196f3,stroke:#1976d2,color:white,stroke-width:0px
+                classDef db fill:#607d8b,stroke:#455a64,color:white,stroke-width:0px
+                classDef llm fill:#673ab7,stroke:#512da8,color:white,stroke-width:0px
+                
+                %% Nós principais
+                Client[Cliente]
+                
+                %% Nós do Sistema EVA
+                Eva[EVA<br>Assistente de Atendimento]
+                Eva_Intent[Classificação<br>de Intenções]
+                Eva_Response[Formulação<br>de Respostas]
+                Eva_Decision[Decisor<br>de Fluxo]
+                
+                %% Nós do Gateway
+                GW[Gateway<br>de Tradução]
+                
+                %% Nós do Sistema Lavandowski
+                Lav[Lavandowski<br>Análise PLD]
+                Lav_Data[Consulta de<br>Dados]
+                Lav_Analysis[Análise<br>de Risco]
+                Lav_Decision[Decisão<br>Automatizada]
+                
+                %% Outros nós
+                Database[(Banco de<br>Dados)]
+                LLMs[Modelos LLM<br>GPT-4o]
+                
+                %% Subgráficos
+                subgraph EVA_GROUP [Sistema EVA]
+                    Eva --> Eva_Intent
+                    Eva_Intent --- Eva_Response
+                    Eva_Response --- Eva_Decision
+                    Eva_Decision --> Eva
+                end
+                
+                subgraph LAV_GROUP [Sistema Lavandowski]
+                    Lav --> Lav_Data
+                    Lav_Data --- Lav_Analysis
+                    Lav_Analysis --- Lav_Decision
+                    Lav_Decision --> Lav
+                end
+                
+                %% Conexões entre sistemas
+                Client -- 1. Pergunta sobre<br>conta bloqueada --> Eva
+                Eva_Intent -- 2. Estrutura<br>a intenção --> GW
+                GW -- 3. Converte<br>para Lavandowski --> Lav
+                Lav_Data -- 4. Consulta --> Database
+                Database -- 5. Retorna<br>informações --> Lav_Data
+                Lav_Analysis -- 6. Solicita<br>análise --> LLMs
+                LLMs -- 7. Retorna<br>avaliação --> Lav_Analysis
+                Lav -- 8. Resposta<br>estruturada --> GW
+                GW -- 9. Converte<br>para EVA --> Eva_Response
+                Eva -- 10. Solicita<br>documentos --> Client
+                
+                %% Fluxo de documentação
+                Client -- 11. Envia<br>documentos --> Eva
+                Eva -- 12. Encaminha<br>documentos --> GW
+                GW -- 13. Repassa<br>documentos --> Lav
+                
+                %% Fluxo de resolução (automatizada)
+                Lav_Decision -- 14. Solicita<br>mais documentos --> Lav
+                Lav -- 15. Ainda<br>inconclusivo --> GW
+                GW -- 16. Comunica<br>tentativas --> Eva_Decision
+                Eva_Decision -- 17. Força<br>decisão --> Eva
+                Eva -- 18. Comando<br>de finalização --> GW
+                GW -- 19. Força<br>resolução --> Lav
+                Lav -- 20. Decisão<br>final --> GW
+                GW -- 21. Traduz<br>decisão --> Eva
+                Eva -- 22. Informa<br>resolução --> Client
+                
+                %% Aplicando estilos
+                class Client client
+                class Eva,Eva_Intent,Eva_Response,Eva_Decision eva
+                class GW gateway
+                class Lav,Lav_Data,Lav_Analysis,Lav_Decision lavan
+                class Database db
+                class LLMs llm
+                
+                %% Estilizando subgráficos
+                style EVA_GROUP fill:#fce4ec,stroke:#f8bbd0,color:#880e4f
+                style LAV_GROUP fill:#e3f2fd,stroke:#bbdefb,color:#0d47a1
+        </div>
+    </div>
+    
+    <div class="controls">
+        <button onclick="window.print()"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+        <button onclick="zoomIn()"><i class="fas fa-search-plus"></i> Ampliar</button>
+        <button onclick="zoomOut()"><i class="fas fa-search-minus"></i> Reduzir</button>
+        <button onclick="resetZoom()"><i class="fas fa-sync"></i> Resetar</button>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            securityLevel: 'loose',
+            theme: 'neutral',
+            fontFamily: 'Space Mono, monospace',
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis',
+                rankSpacing: 80,
+                nodeSpacing: 50,
+                padding: 20
+            }
+        });
+        
+        let scale = 1;
+        const mermaidDiv = document.querySelector('.mermaid');
+        
+        function zoomIn() {
+            scale += 0.1;
+            applyZoom();
+        }
+        
+        function zoomOut() {
+            if (scale > 0.5) {
+                scale -= 0.1;
+                applyZoom();
+            }
+        }
+        
+        function resetZoom() {
+            scale = 1;
+            applyZoom();
+        }
+        
+        function applyZoom() {
+            mermaidDiv.style.transform = `scale(${scale})`;
+            mermaidDiv.style.transformOrigin = 'center center';
+        }
+    </script>
+</body>
+</html> 
